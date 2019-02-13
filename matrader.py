@@ -20,7 +20,7 @@ def main(argv):
 	try:
 		opts, args = getopt.getopt(argv, "hp",["period=",])
 	except getopt.GetoptError:
-		print('njord.py -p <period>')
+		print('matrader.py -p <period>')
 		sys.exit(2)
 
 	for opt, arg in opts:
@@ -34,10 +34,11 @@ def main(argv):
 			else:
 				print('Clock Error. Exchange requires periods in 300,900,1800,7200,14400,86400 seconds.')
 				sys.exit(2)
- 	#insert public & private key here
-	conn = poloniex("","")
 				
+ 	#insert public & private key here:
+	conn = poloniex("","")
 	
+	#send "returnTicker" query, adds data to Price list & returns Moving Average				
 	while True:	
 		currentValues = conn.api_query("returnTicker")
 
@@ -48,22 +49,17 @@ def main(argv):
 
 		print(" TIME: " + "{:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now()) + " PERIOD: %ss. \n Pair: %s %s  \n Current MA: %s." % (period, pair, lastPairPrice, currentMA) )
 		prices.append(float(lastPairPrice))
-		#prices = prices[-lengthOfMA:]	
 		time.sleep(int(period))
 
-		#Highest/Lowest prices
-
+		#Highest/Lowest prices:
 		def highest_price(prices):
 			highest = prices[0] 
 			for high in prices:
 				if high > highest:
 					highest = high
 			return highest 	
-
 		highpoint = highest_price(prices)
-
 		print( " High: " + str(highpoint))
-
 
 		def lowest_price(prices):
 			lowest = prices[0] 
@@ -71,16 +67,13 @@ def main(argv):
 				if low < lowest:
 					lowest = low
 			return lowest
-
 		lowpoint = lowest_price(prices)
-
 		print( " Low: " + str(lowpoint) +"\n ")
 
 if __name__ == "__main__":
 		main(sys.argv[1:])
 
-#Add Trading Parameters here
- 
+
 		
 
 
