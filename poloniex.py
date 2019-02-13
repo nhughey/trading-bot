@@ -1,5 +1,5 @@
 
-#Poloniex wrapper orignally by bwentzloff, updated for Python 3.7 
+#Poloniex wrapper orignally by bwentzloff, updated for Python 3.7 from 2
 
 import urllib
 import urllib.parse
