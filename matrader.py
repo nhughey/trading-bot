@@ -13,8 +13,7 @@ def main(argv):
 	pair = "BTC_XMR"
 	prices = []
 	
-#API Usher
-
+	#API Usher
 	print("POLONIEX MA Trader." + version_number +  "\n ")
 
 	try:
@@ -41,11 +40,10 @@ def main(argv):
 	#send "returnTicker" query, adds data to Price list & returns Moving Average				
 	while True:	
 		currentValues = conn.api_query("returnTicker")
-
 		lastPairPrice = currentValues[pair]["last"]
-
 		if (len(prices) > 0):
 			currentMA = sum(prices) / float(len(prices))
+			#Add more indicators here
 
 		print(" TIME: " + "{:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now()) + " PERIOD: %ss. \n Pair: %s %s  \n Current MA: %s." % (period, pair, lastPairPrice, currentMA) )
 		prices.append(float(lastPairPrice))
